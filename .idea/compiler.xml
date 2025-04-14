@@ -6,8 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="WebTech" />
+        <module name="FrogCrew-WebTech" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="WebTech" target="23" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="FrogCrew-WebTech" options="-parameters" />
+    </option>
   </component>
 </project>
