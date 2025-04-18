@@ -1,56 +1,32 @@
-package crewMember;
+package edu.tcu.cs.frogcrew.crewmember;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
-import java.io.Serializable;
 import java.util.List;
 
-@Entity
-public class CrewMember implements Serializable {
+public class CrewMemberDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotEmpty(message = "First name is required.")
+    @NotEmpty
     private String firstName;
 
-    @NotEmpty(message = "Last name is required.")
+    @NotEmpty
     private String lastName;
 
-    @NotEmpty(message = "Email is required.")
-    @Email(message = "Must be a valid email address.")
+    @NotEmpty
     private String email;
 
-    @NotEmpty(message = "Phone number is required.")
+    @NotEmpty
     private String phoneNumber;
 
-    @NotEmpty(message = "Password is required.")
+    @NotEmpty
     private String password;
 
-    @NotEmpty(message = "Role is required.")
+    @NotEmpty
     private String role;
 
-    @ElementCollection
-    @NotEmpty(message = "At least one position is required.")
     private List<String> position;
 
-    public CrewMember() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public CrewMemberDTO() {}
 
     public String getFirstName() {
         return firstName;

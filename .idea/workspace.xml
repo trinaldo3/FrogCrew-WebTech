@@ -5,7 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f49dff3-bf94-43a9-bbb3-d2a6911d4a31" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/FrogCrewApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/availability/Availability.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/availability/AvailabilityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/availability/AvailabilityDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/availability/AvailabilityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/availability/AvailabilityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewlist/CrewAssignmentExport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewlist/CrewListController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/FrogCrewApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/availability/AvailabilityControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/availability/AvailabilityServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewlist/CrewAssignmentExportTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewlist/CrewListControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/game/GameControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/game/GameServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/crewMember/CrewMember.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,18 +63,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "backend",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.FrogCrewApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in FrogCrew-WebTech.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FrogCrewApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/src/main/java" />
@@ -53,6 +86,55 @@
       <recent name="$PROJECT_DIR$/backend/src/main" />
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.tcu.cs.frogcrew.game" />
+      <recent name="edu.tcu.cs.frogcrew" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.All in FrogCrew-WebTech">
+    <configuration name="FrogCrewApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.tcu.cs.frogcrew.FrogCrewApplication" />
+      <module name="FrogCrew-WebTech" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.tcu.cs.frogcrew.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in FrogCrew-WebTech" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FrogCrew-WebTech" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FrogCrewApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FrogCrew-WebTech" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.tcu.cs.frogcrew.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.tcu.cs.frogcrew" />
+      <option name="MAIN_CLASS_NAME" value="edu.tcu.cs.frogcrew.FrogCrewApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in FrogCrew-WebTech" />
+        <item itemvalue="JUnit.FrogCrewApplicationTests" />
+        <item itemvalue="Application.FrogCrewApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
