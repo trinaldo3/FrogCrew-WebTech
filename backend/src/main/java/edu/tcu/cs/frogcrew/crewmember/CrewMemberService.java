@@ -28,4 +28,15 @@ public class CrewMemberService {
     public Optional<CrewMember> findById(Long id) {
         return repository.findById(id);
     }
+
+    public void inviteCrewMember(String token, String email) {
+        // Simulate sending invite (expand later if needed)
+        System.out.println("Inviting crew member with email: " + email + " using token: " + token);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+
 }

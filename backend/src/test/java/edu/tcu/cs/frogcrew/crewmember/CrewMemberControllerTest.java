@@ -99,4 +99,30 @@ class CrewMemberControllerTest {
         mockMvc.perform(get("/crewmember/99"))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void inviteCrewMember_shouldReturn200AndSuccessMessage() throws Exception {
+        String token = "abc123";
+        String email = "someone@example.com";
+        Map<String, String> payload = new HashMap<>();
+        payload.put("email", email);
+
+        mockMvc.perform(post("/invite")
+                        .param("token", token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(payload)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Crew member invited successfully."));
+    }
+
+    @Test
+    void deleteCrewMember_shouldReturn200AndSuccessMessage() throws Exception {
+        mockMvc.perform(delete("/crewmember/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.message").value("Delete Success"))
+                .andExpect(jsonPath("$.data").doesNotExist());
+    }
+
 }

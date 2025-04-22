@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f49dff3-bf94-43a9-bbb3-d2a6911d4a31" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewlist/CrewListService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewlist/CrewAssignmentExport.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewlist/CrewAssignmentExport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewlist/CrewListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewlist/CrewListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewlist/CrewAssignmentExportTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewlist/CrewAssignmentExportTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewlist/CrewListControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewlist/CrewListControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +41,12 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Application.FrogCrewApplication.executor": "Run",
     "JUnit.All in FrogCrew-WebTech.executor": "Run",
+    "JUnit.CrewMemberControllerTest.deleteCrewMember_shouldReturn200AndSuccessMessage.executor": "Run",
+    "JUnit.CrewMemberControllerTest.inviteCrewMember_shouldReturn200AndSuccessMessage.executor": "Run",
     "JUnit.FrogCrewApplicationTests.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "crew-list-test",
+    "git-widget-placeholder": "invite-delete",
     "kotlin-language-version-configured": "true",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -88,6 +88,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CrewMemberControllerTest.deleteCrewMember_shouldReturn200AndSuccessMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FrogCrew-WebTech" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.tcu.cs.frogcrew.crewmember.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.tcu.cs.frogcrew.crewmember" />
+      <option name="MAIN_CLASS_NAME" value="edu.tcu.cs.frogcrew.crewmember.CrewMemberControllerTest" />
+      <option name="METHOD_NAME" value="deleteCrewMember_shouldReturn200AndSuccessMessage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CrewMemberControllerTest.inviteCrewMember_shouldReturn200AndSuccessMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FrogCrew-WebTech" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.tcu.cs.frogcrew.crewmember.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.tcu.cs.frogcrew.crewmember" />
+      <option name="MAIN_CLASS_NAME" value="edu.tcu.cs.frogcrew.crewmember.CrewMemberControllerTest" />
+      <option name="METHOD_NAME" value="inviteCrewMember_shouldReturn200AndSuccessMessage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FrogCrewApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FrogCrew-WebTech" />
       <extension name="coverage">
@@ -106,6 +138,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in FrogCrew-WebTech" />
+        <item itemvalue="JUnit.CrewMemberControllerTest.deleteCrewMember_shouldReturn200AndSuccessMessage" />
+        <item itemvalue="JUnit.CrewMemberControllerTest.inviteCrewMember_shouldReturn200AndSuccessMessage" />
         <item itemvalue="JUnit.FrogCrewApplicationTests" />
         <item itemvalue="Application.FrogCrewApplication" />
       </list>
