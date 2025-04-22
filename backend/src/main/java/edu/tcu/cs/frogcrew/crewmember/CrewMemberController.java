@@ -68,4 +68,26 @@ public class CrewMemberController {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @PostMapping("/invite")
+    public ResponseEntity<String> inviteCrewMember(@RequestParam String token, @RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        service.inviteCrewMember(token, email);
+        return ResponseEntity.ok("Crew member invited successfully.");
+    }
+
+    @DeleteMapping("/crewmember/{id}")
+    public ResponseEntity<Map<String, Object>> deleteCrewMember(@PathVariable Long id) {
+        service.delete(id);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("flag", true);
+        response.put("code", 200);
+        response.put("message", "Delete Success");
+        response.put("data", null);
+
+        return ResponseEntity.ok(response);
+    }
+
+
 }
