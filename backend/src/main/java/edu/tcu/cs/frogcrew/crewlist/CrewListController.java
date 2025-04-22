@@ -1,24 +1,35 @@
 package edu.tcu.cs.frogcrew.crewlist;
 
-import edu.tcu.cs.frogcrew.crewmember.CrewMember;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/crewlist")
 public class CrewListController {
 
-    private final CrewAssignmentExport crewAssignmentExport;
+    private final CrewListService crewListService;
 
-    public CrewListController(CrewAssignmentExport crewAssignmentExport) {
-        this.crewAssignmentExport = crewAssignmentExport;
+    public CrewListController(CrewListService crewListService) {
+        this.crewListService = crewListService;
     }
 
     @GetMapping("/export/{gameId}")
-    public ResponseEntity<List<CrewMember>> exportCrewList(@PathVariable Long gameId) {
-        List<CrewMember> crew = crewAssignmentExport.getCrewAssignedToGame(gameId);
-        return ResponseEntity.ok(crew);
+    public ResponseEntity<Map<String, Object>> exportCrewList(@PathVariable Long gameId) {
+        List<CrewAssignmentExport> exportList = crewListService.getCrewAssignedToGame(gameId);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("flag", true);
+        response.put("code", 200);
+        response.put("message", "Find Success");
+        response.put("data", exportList);
+
+        return ResponseEntity.ok(response);
     }
 }
