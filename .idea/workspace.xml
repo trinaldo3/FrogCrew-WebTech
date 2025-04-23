@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3f49dff3-bf94-43a9-bbb3-d2a6911d4a31" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/crewmember/CrewMemberControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/edu/tcu/cs/frogcrew/game/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/game/GameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/game/GameControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/game/GameServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/edu/tcu/cs/frogcrew/game/GameServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +49,7 @@
     "JUnit.FrogCrewApplicationTests.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "get-crew-members",
+    "git-widget-placeholder": "add-game",
     "kotlin-language-version-configured": "true",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",

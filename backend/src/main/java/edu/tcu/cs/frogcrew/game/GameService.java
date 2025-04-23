@@ -20,4 +20,17 @@ public class GameService {
                 .map(GameDTO::new)
                 .collect(Collectors.toList());
     }
+
+    public List<Game> createGameSchedule(String token, List<GameDTO> gameDTOList) {
+        List<Game> games = gameDTOList.stream().map(dto -> {
+            Game g = new Game();
+            g.setOpponent(dto.getOpponent());
+            g.setLocation(dto.getLocation());
+            g.setGameDate(dto.getGameDate());
+            g.setCallTime(dto.getCallTime());
+            return g;
+        }).toList();
+
+        return repository.saveAll(games);
+    }
 }

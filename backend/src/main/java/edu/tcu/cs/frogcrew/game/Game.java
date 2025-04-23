@@ -2,6 +2,7 @@ package edu.tcu.cs.frogcrew.game;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Game {
@@ -14,7 +15,9 @@ public class Game {
 
     private LocalDate gameDate;
 
-    private String venue;
+    private LocalTime callTime;
+
+    private String location;
 
     private String opponent;
 
@@ -46,12 +49,20 @@ public class Game {
         this.gameDate = gameDate;
     }
 
-    public String getVenue() {
-        return venue;
+    public LocalTime getCallTime() {
+        return callTime;
     }
 
-    public void setVenue(String venue) {
-        this.venue = venue;
+    public void setCallTime(LocalTime callTime) {
+        this.callTime = callTime;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getOpponent() {
