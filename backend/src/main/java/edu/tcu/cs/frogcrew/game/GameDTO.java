@@ -1,24 +1,26 @@
 package edu.tcu.cs.frogcrew.game;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class GameDTO {
 
     private Long gameId;
-    private Long scheduleId;
-    private LocalDate gameDate;
-    private String venue;
     private String opponent;
+    private String location;
+    private LocalDate gameDate;
+    private LocalTime callTime;
     private boolean isFinalized;
 
-    public GameDTO() {}
+    public GameDTO() {
+    }
 
     public GameDTO(Game game) {
         this.gameId = game.getGameId();
-        this.scheduleId = game.getScheduleId();
-        this.gameDate = game.getGameDate();
-        this.venue = game.getVenue();
         this.opponent = game.getOpponent();
+        this.location = game.getLocation();
+        this.gameDate = game.getGameDate();
+        this.callTime = game.getCallTime();
         this.isFinalized = game.isFinalized();
     }
 
@@ -30,12 +32,20 @@ public class GameDTO {
         this.gameId = gameId;
     }
 
-    public Long getScheduleId() {
-        return scheduleId;
+    public String getOpponent() {
+        return opponent;
     }
 
-    public void setScheduleId(Long scheduleId) {
-        this.scheduleId = scheduleId;
+    public void setOpponent(String opponent) {
+        this.opponent = opponent;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public LocalDate getGameDate() {
@@ -46,20 +56,12 @@ public class GameDTO {
         this.gameDate = gameDate;
     }
 
-    public String getVenue() {
-        return venue;
+    public LocalTime getCallTime() {
+        return callTime;
     }
 
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-
-    public String getOpponent() {
-        return opponent;
-    }
-
-    public void setOpponent(String opponent) {
-        this.opponent = opponent;
+    public void setCallTime(LocalTime callTime) {
+        this.callTime = callTime;
     }
 
     public boolean isFinalized() {
@@ -68,9 +70,5 @@ public class GameDTO {
 
     public void setFinalized(boolean finalized) {
         isFinalized = finalized;
-    }
-
-    public void setIsFinalized(boolean b) {
-        this.isFinalized = isFinalized;
     }
 }

@@ -29,4 +29,31 @@ public class GameController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/games")
+    public ResponseEntity<Map<String, Object>> addGamesToSchedule(
+            @RequestParam String token,
+            @RequestBody List<GameDTO> gameDTOList) {
+
+        List<Game> addedGames = service.createGameSchedule(token, gameDTOList);
+
+        List<Map<String, Object>> data = addedGames.stream().map(game -> {
+            Map<String, Object> g = new HashMap<>();
+            g.put("id", game.getGameId());
+            g.put("opponent", game.getOpponent());
+            g.put("location", game.getLocation());
+            g.put("gameDate", game.getGameDate());
+            g.put("callTime", game.getCallTime());
+            return g;
+        }).toList();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("flag", true);
+        response.put("code", 200);
+        response.put("message", "Games added to schedule successfully.");
+        response.put("data", data);
+
+        return ResponseEntity.ok(response);
+    }
+
 }

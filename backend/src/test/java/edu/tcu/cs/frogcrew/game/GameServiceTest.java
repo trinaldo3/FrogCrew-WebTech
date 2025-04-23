@@ -30,7 +30,7 @@ class GameServiceTest {
         g1.setGameId(1L);
         g1.setScheduleId(1L);
         g1.setGameDate(LocalDate.of(2024, 9, 7));
-        g1.setVenue("Carter");
+        g1.setLocation("Carter");
         g1.setOpponent("LIU");
         g1.setFinalized(false);
 
@@ -38,7 +38,7 @@ class GameServiceTest {
         g2.setGameId(2L);
         g2.setScheduleId(1L);
         g2.setGameDate(LocalDate.of(2024, 9, 14));
-        g2.setVenue("Carter");
+        g2.setLocation("Carter");
         g2.setOpponent("UCF");
         g2.setFinalized(true);
 
