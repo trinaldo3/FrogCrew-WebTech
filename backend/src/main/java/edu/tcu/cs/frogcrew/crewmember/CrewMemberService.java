@@ -31,7 +31,7 @@ public class CrewMemberService {
     }
 
     public void inviteCrewMember(String token, String email) {
-        // Simulate sending invite (expand later if needed)
+        // Simulate sending invite
         System.out.println("Inviting crew member with email: " + email + " using token: " + token);
     }
 

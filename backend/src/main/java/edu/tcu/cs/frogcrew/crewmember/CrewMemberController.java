@@ -53,7 +53,6 @@ public class CrewMemberController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Optional: Better validation error responses
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
         Map<String, Object> errors = new HashMap<>();

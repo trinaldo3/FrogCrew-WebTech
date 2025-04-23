@@ -1,4 +1,3 @@
-// CrewListService.java
 package edu.tcu.cs.frogcrew.crewlist;
 
 import edu.tcu.cs.frogcrew.crewmember.CrewMember;
@@ -18,7 +17,6 @@ public class CrewListService {
     }
 
     public List<CrewAssignmentExport> getCrewAssignedToGame(Long gameId) {
-        // TODO: Replace with actual filtering logic
         return crewMemberRepository.findAll().stream()
                 .map(c -> new CrewAssignmentExport(
                         c.getId(),
@@ -28,4 +26,11 @@ public class CrewListService {
                         c.getRole()))
                 .collect(Collectors.toList());
     }
+
+    public void scheduleCrew(Long gameId, List<Long> crewMemberIds) {
+
+        System.out.println("Scheduling crew members " + crewMemberIds + " for game " + gameId);
+
+    }
+
 }
