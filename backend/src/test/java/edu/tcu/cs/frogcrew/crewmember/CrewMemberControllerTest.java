@@ -125,4 +125,35 @@ class CrewMemberControllerTest {
                 .andExpect(jsonPath("$.data").doesNotExist());
     }
 
+    @Test
+    void getAllCrewMembers_shouldReturn200AndListOfCrew() throws Exception {
+        CrewMember crew1 = new CrewMember();
+        crew1.setId(1L);
+        crew1.setFirstName("John");
+        crew1.setLastName("Doe");
+        crew1.setEmail("john.doe@tcu.edu");
+        crew1.setPhoneNumber("1234567890");
+        crew1.setRole("ADMIN");
+        crew1.setPosition(List.of("Producer"));
+
+        CrewMember crew2 = new CrewMember();
+        crew2.setId(2L);
+        crew2.setFirstName("Jane");
+        crew2.setLastName("Smith");
+        crew2.setEmail("jane.smith@tcu.edu");
+        crew2.setPhoneNumber("0987654321");
+        crew2.setRole("CREW");
+        crew2.setPosition(List.of("Director"));
+
+        when(crewMemberService.findAll()).thenReturn(List.of(crew1, crew2));
+
+        mockMvc.perform(get("/crewmembers"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.message").value("Fetch Success"))
+                .andExpect(jsonPath("$.data[0].firstName").value("John"))
+                .andExpect(jsonPath("$.data[1].firstName").value("Jane"));
+    }
+
 }

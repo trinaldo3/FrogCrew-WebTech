@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -85,6 +86,31 @@ public class CrewMemberController {
         response.put("code", 200);
         response.put("message", "Delete Success");
         response.put("data", null);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/crewmembers")
+    public ResponseEntity<Map<String, Object>> getAllCrewMembers() {
+        List<CrewMember> crewList = service.findAll();
+
+        List<Map<String, Object>> data = crewList.stream().map(crew -> {
+            Map<String, Object> crewMap = new HashMap<>();
+            crewMap.put("id", crew.getId());
+            crewMap.put("firstName", crew.getFirstName());
+            crewMap.put("lastName", crew.getLastName());
+            crewMap.put("email", crew.getEmail());
+            crewMap.put("phoneNumber", crew.getPhoneNumber());
+            crewMap.put("role", crew.getRole());
+            crewMap.put("positions", crew.getPosition());
+            return crewMap;
+        }).toList();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("flag", true);
+        response.put("code", 200);
+        response.put("message", "Fetch Success");
+        response.put("data", data);
 
         return ResponseEntity.ok(response);
     }
