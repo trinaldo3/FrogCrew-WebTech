@@ -2,6 +2,7 @@ package edu.tcu.cs.frogcrew.crewmember;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,10 @@ public class CrewMemberService {
 
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public List<CrewMember> findAll() {
+        return repository.findAll();
     }
 
 
