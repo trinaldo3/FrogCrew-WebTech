@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/crewmember") //Change
 public class CrewMemberController {
 
     private final CrewMemberService service;

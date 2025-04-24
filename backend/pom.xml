@@ -72,6 +72,12 @@
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-keyvault</artifactId>
         </dependency>
+        <dependency>
+  <groupId>org.springdoc</groupId>
+  <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+  <version>2.1.0</version>
+</dependency>
+
     </dependencies>
 
     <!--    The Spring Cloud Azure Bill of Materials (BOM)-->
