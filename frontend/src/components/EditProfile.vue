@@ -58,30 +58,36 @@ export default {
     }
 
     async function loadProfile() {
-      try {
-        const res = await fetch(`${API}/crewMember/${userId}`)
-        if (!res.ok) throw new Error(res.statusText)
-        Object.assign(form, await res.json())
-      } catch (e) {
-        console.error('Load profile failed:', e)
-      }
+  try {
+    const res = await fetch(`${API}/crewmember/${userId}`);
+    if (!res.ok) throw new Error(res.statusText);
+
+    const result = await res.json();
+    Object.assign(form, result);
+
+    if (Array.isArray(form.qualifiedPosition)) {
+      form.qualifiedPosition = form.qualifiedPosition.join(', '); // just in case it's an array
     }
+  } catch (e) {
+    console.error('Load profile failed:', e);
+  }
+}
 
     async function updateProfile() {
-      if (!validate()) return
+      if (!validate()) return;
       try {
-        const res = await fetch(`${API}/crewMember/${userId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form)
-        })
-        if (!res.ok) throw new Error(await res.text())
-        alert('Profile updated successfully!')
-      } catch (e) {
-        console.error('Update failed:', e)
-        alert('Update failed. See console.')
-      }
-    }
+        const res = await fetch(`${API}/crewmember/${userId}`, { // <-- lowercase "m"
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+    });
+    if (!res.ok) throw new Error(await res.text());
+    alert('Profile updated successfully!');
+  } catch (e) {
+    console.error('Update failed:', e);
+    alert('Update failed. See console.');
+  }
+}
 
     onMounted(loadProfile)
 
