@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/crewmember") //Change
+@RequestMapping("/crewmember")
 public class CrewMemberController {
 
     private final CrewMemberService service;
@@ -22,7 +23,7 @@ public class CrewMemberController {
         this.service = service;
     }
 
-    @PostMapping("/crewmember")
+    @PostMapping("")
     public ResponseEntity<Map<String, Object>> createCrewMember(
             @RequestParam("token") String token,
             @Valid @RequestBody CrewMemberDTO dto) {
@@ -47,38 +48,14 @@ public class CrewMemberController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/crewmember/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getCrewMember(@PathVariable Long id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Optional: Better validation error responses
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        Map<String, Object> errors = new HashMap<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.put(error.getField(), error.getDefaultMessage());
-        }
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("flag", false);
-        response.put("code", 400);
-        response.put("message", "Provided arguments are invalid, see data for details.");
-        response.put("data", errors);
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @PostMapping("/invite")
-    public ResponseEntity<String> inviteCrewMember(@RequestParam String token, @RequestBody Map<String, String> payload) {
-        String email = payload.get("email");
-        service.inviteCrewMember(token, email);
-        return ResponseEntity.ok("Crew member invited successfully.");
-    }
-
-    @DeleteMapping("/crewmember/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deleteCrewMember(@PathVariable Long id) {
         service.delete(id);
 
@@ -91,7 +68,7 @@ public class CrewMemberController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/crewmembers")
+    @GetMapping("/all")
     public ResponseEntity<Map<String, Object>> getAllCrewMembers() {
         List<CrewMember> crewList = service.findAll();
 
@@ -116,5 +93,29 @@ public class CrewMemberController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/invite")
+    public ResponseEntity<String> inviteCrewMember(
+            @RequestParam String token,
+            @RequestBody Map<String, String> payload) {
 
+        String email = payload.get("email");
+        service.inviteCrewMember(token, email);
+        return ResponseEntity.ok("Crew member invited successfully.");
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        Map<String, Object> errors = new HashMap<>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errors.put(error.getField(), error.getDefaultMessage());
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("flag", false);
+        response.put("code", 400);
+        response.put("message", "Provided arguments are invalid, see data for details.");
+        response.put("data", errors);
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }
