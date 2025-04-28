@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/crewmember") //Change
 public class CrewMemberController {
