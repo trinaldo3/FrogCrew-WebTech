@@ -22,9 +22,23 @@ public class CrewMemberService {
         member.setPhoneNumber(dto.getPhoneNumber());
         member.setPassword(dto.getPassword());
         member.setRole(dto.getRole());
-        member.setPosition(dto.getPosition());
+        member.setQualifiedPosition(dto.getPosition());
         return repository.save(member);
     }
+
+    public CrewMember update(Long id, CrewMemberDTO dto) {
+        CrewMember member = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Crew Member not found"));
+    
+        member.setFirstName(dto.getFirstName());
+        member.setLastName(dto.getLastName());
+        member.setPhoneNumber(dto.getPhoneNumber());
+        member.setRole(dto.getRole());
+        member.setQualifiedPosition(dto.getPosition());
+    
+        return repository.save(member);
+    }
+    
 
     public Optional<CrewMember> findById(Long id) {
         return repository.findById(id);
