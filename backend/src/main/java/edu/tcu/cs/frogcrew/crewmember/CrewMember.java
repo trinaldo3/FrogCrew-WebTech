@@ -31,7 +31,7 @@ public class CrewMember {
     private String role;
 
     @ElementCollection
-    private List<String> position;
+    private List<String> qualifiedPosition;
 
     public CrewMember() {}
 
@@ -92,10 +92,10 @@ public class CrewMember {
     }
 
     public List<String> getPosition() {
-        return position;
+        return qualifiedPosition;
     }
 
     public void setPosition(List<String> position) {
-        this.position = position;
+        this.qualifiedPosition = position;
     }
 }

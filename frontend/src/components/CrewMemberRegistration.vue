@@ -60,12 +60,18 @@ export default {
     async function handleSubmit() {
       if (!validate()) return;
       try {
+        const payload = {
+          ...form,
+          position: [form.qualifiedPosition], 
+        };
+        delete payload.qualifiedPosition;  
+
         const res = await fetch(
           `http://localhost:8080/crewmember?token=${INVITE_TOKEN}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form),
+            body: JSON.stringify(payload),
           }
         );
 
@@ -77,6 +83,7 @@ export default {
         alert("Registration failed. See console for details.");
       }
     }
+
 
     return { form, errors, fields, handleSubmit };
   },
