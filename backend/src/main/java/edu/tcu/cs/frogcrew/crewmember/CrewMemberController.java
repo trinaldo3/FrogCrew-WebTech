@@ -37,7 +37,7 @@ public class CrewMemberController {
         data.put("email", saved.getEmail());
         data.put("phoneNumber", saved.getPhoneNumber());
         data.put("role", saved.getRole());
-        data.put("positions", saved.getPosition()); // rename for API compliance
+        data.put("qualifiedPosition", saved.getQualifiedPosition()); // rename for API compliance
 
         Map<String, Object> response = new HashMap<>();
         response.put("flag", true);
@@ -49,11 +49,48 @@ public class CrewMemberController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCrewMember(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> getCrewMember(@PathVariable Long id) {
         return service.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+            .map(crew -> {
+                Map<String, Object> data = new HashMap<>();
+                data.put("id", crew.getId());
+                data.put("firstName", crew.getFirstName());
+                data.put("lastName", crew.getLastName());
+                data.put("email", crew.getEmail());
+                data.put("phoneNumber", crew.getPhoneNumber());
+                data.put("role", crew.getRole());
+                data.put("qualifiedPosition", crew.getQualifiedPosition()); 
+                return ResponseEntity.ok(data);
+            })
+            .orElse(ResponseEntity.notFound().build());
+}
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> updateCrewMember(
+            @PathVariable Long id,
+            @RequestBody CrewMemberDTO dto) {
+
+        CrewMember updated = service.update(id, dto);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", updated.getId());
+        data.put("firstName", updated.getFirstName());
+        data.put("lastName", updated.getLastName());
+        data.put("email", updated.getEmail());
+        data.put("phoneNumber", updated.getPhoneNumber());
+        data.put("role", updated.getRole());
+        data.put("qualifiedPosition", updated.getQualifiedPosition());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("flag", true);
+        response.put("code", 200);
+        response.put("message", "Update Success");
+        response.put("data", data);
+
+        return ResponseEntity.ok(response);
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deleteCrewMember(@PathVariable Long id) {
@@ -80,7 +117,7 @@ public class CrewMemberController {
             crewMap.put("email", crew.getEmail());
             crewMap.put("phoneNumber", crew.getPhoneNumber());
             crewMap.put("role", crew.getRole());
-            crewMap.put("positions", crew.getPosition());
+            crewMap.put("qualifiedPosition", crew.getQualifiedPosition());
             return crewMap;
         }).toList();
 
