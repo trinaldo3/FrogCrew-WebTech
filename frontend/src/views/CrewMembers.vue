@@ -38,7 +38,7 @@ onMounted(loadMembers)
 
 async function loadMembers() {
   try {
-    const res = await fetch('/crewmembers')
+    const res = await fetch('http://localhost:8080/crewmember/all')
     if (!res.ok) throw new Error(await res.text())
     const payload = await res.json()
     // the back-end wrapper returns { flag, code, data }
