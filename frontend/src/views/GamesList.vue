@@ -1,56 +1,63 @@
 <template>
-    <div class="games-list">
-      <h1>Upcoming Games</h1>
-      <ul>
-        <li v-for="game in games" :key="game.gameId">
-          <strong>{{ game.sport }}:</strong>
-          {{ formatDate(game.gameDate) }} @ {{ game.gameTime }} –
-          {{ game.opponent }}
-        </li>
-      </ul>
-    </div>
-  </template>
-  
-  <script>
-  import { ref, onMounted } from 'vue'
-  import axios from 'axios'
-  
-  export default {
-    name: 'GamesList',
-    setup() {
-      const games = ref([])
-  
-      const loadGames = async () => {
-        try {
-          const res = await axios.get('https://localhost:8080/gameSchedule/games')
-          games.value = res.data || []
-        } catch (e) {
-          console.error('Failed to fetch games', e)
-        }
-      }
-  
-      const formatDate = (iso) => {
-        const d = new Date(iso)
-        return d.toLocaleDateString()
-      }
-  
-      onMounted(loadGames)
-      return { games, formatDate }
-    },
+  <section class="wrapper">
+    <h2>Upcoming Games</h2>
+
+    <table v-if="games.length">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Sport</th>
+          <th>Opponent</th>
+          <th>Venue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="g in games" :key="g.id">
+          <td>{{ formatDate(g.gameDate) }}</td>
+          <td>{{ g.sport }}</td>
+          <td>{{ g.opponent }}</td>
+          <td>{{ g.venue }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p v-else>No games found.</p>
+    <p v-if="error" class="error">{{ error }}</p>
+  </section>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const games = ref([])
+const error = ref('')
+
+onMounted(loadGames)
+
+async function loadGames() {
+  try {
+    const res = await fetch('/gameSchedule/games')
+    if (!res.ok) throw new Error(await res.text())
+    const payload = await res.json()
+    games.value = Array.isArray(payload.data) ? payload.data : []
+  } catch (e) {
+    console.error(e)
+    error.value = 'Unable to load games.'
   }
-  </script>
-  
-  <style scoped>
-  .games-list {
-    max-width: 600px;
-    margin: 2rem auto;
-  }
-  .games-list ul {
-    list-style: none;
-    padding: 0;
-  }
-  .games-list li + li {
-    margin-top: 0.5rem;
-  }
-  </style>
-  
+}
+
+function formatDate(str) {
+  // expects yyyy-MM-dd in the demo data
+  return new Date(str).toLocaleDateString(undefined, {
+    year: 'numeric', month: 'short', day: 'numeric'
+  })
+}
+</script>
+
+<style scoped>
+.wrapper { max-width: 800px; margin: 2rem auto; }
+table     { width: 100%; border-collapse: collapse; }
+th, td    { padding: .6rem; border-bottom: 1px solid #ddd; }
+th        { text-align: left; background: #eee; }
+.error    { color: #d9534f; margin-top: 1rem; }
+</style>
