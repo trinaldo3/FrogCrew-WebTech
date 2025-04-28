@@ -29,31 +29,47 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
-const members = ref([])
-const error   = ref('')
+const members = ref([]);
+const error = ref("");
 
-onMounted(loadMembers)
+onMounted(loadMembers);
 
 async function loadMembers() {
   try {
-    const res = await fetch('/crewmembers')
-    if (!res.ok) throw new Error(await res.text())
-    const payload = await res.json()
-    // the back-end wrapper returns { flag, code, data }
-    members.value = Array.isArray(payload.data) ? payload.data : []
+    const res = await fetch("/crewMember"); // capital M — Vite proxy
+    if (!res.ok) throw new Error(await res.text());
+    const payload = await res.json();
+    // API wrapper shape: { flag, code, data, message }
+    members.value = Array.isArray(payload.data) ? payload.data : [];
   } catch (e) {
-    console.error(e)
-    error.value = 'Unable to load crew members.'
+    console.error(e);
+    error.value = "Unable to load crew members.";
   }
 }
 </script>
 
 <style scoped>
-.wrapper { max-width: 850px; margin: 2rem auto; }
-table     { width: 100%; border-collapse: collapse; }
-th, td    { padding: .6rem; border-bottom: 1px solid #ddd; }
-th        { text-align: left; background: #eee; }
-.error    { color: #d9534f; margin-top: 1rem; }
+.wrapper {
+  max-width: 850px;
+  margin: 2rem auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  text-align: left;
+  background: #eee;
+}
+.error {
+  color: #d9534f;
+  margin-top: 1rem;
+}
 </style>

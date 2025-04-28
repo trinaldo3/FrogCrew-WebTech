@@ -27,37 +27,55 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
-const games = ref([])
-const error = ref('')
+const games = ref([]);
+const error = ref("");
 
-onMounted(loadGames)
+onMounted(loadGames);
 
 async function loadGames() {
   try {
-    const res = await fetch('/gameSchedule/games')
-    if (!res.ok) throw new Error(await res.text())
-    const payload = await res.json()
-    games.value = Array.isArray(payload.data) ? payload.data : []
+    const res = await fetch("/gameSchedule/games"); // Vite proxy handles host
+    if (!res.ok) throw new Error(await res.text());
+    const payload = await res.json();
+    games.value = Array.isArray(payload.data) ? payload.data : [];
   } catch (e) {
-    console.error(e)
-    error.value = 'Unable to load games.'
+    console.error(e);
+    error.value = "Unable to load games.";
   }
 }
 
 function formatDate(str) {
-  // expects yyyy-MM-dd in the demo data
+  if (!str) return "";
   return new Date(str).toLocaleDateString(undefined, {
-    year: 'numeric', month: 'short', day: 'numeric'
-  })
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 </script>
 
 <style scoped>
-.wrapper { max-width: 800px; margin: 2rem auto; }
-table     { width: 100%; border-collapse: collapse; }
-th, td    { padding: .6rem; border-bottom: 1px solid #ddd; }
-th        { text-align: left; background: #eee; }
-.error    { color: #d9534f; margin-top: 1rem; }
+.wrapper {
+  max-width: 800px;
+  margin: 2rem auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  text-align: left;
+  background: #eee;
+}
+.error {
+  color: #d9534f;
+  margin-top: 1rem;
+}
 </style>

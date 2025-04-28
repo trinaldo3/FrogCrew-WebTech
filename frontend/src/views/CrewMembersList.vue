@@ -23,7 +23,7 @@
   
       const loadMembers = async () => {
         try {
-          const res = await axios.get('https://localhost:8080/crewMember');
+          const res = await fetch('/crewmember/crewmembers')
           members.value = res.data || [];
         } catch (e) {
           console.error('Failed to load crew members', e);
