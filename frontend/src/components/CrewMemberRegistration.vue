@@ -61,11 +61,19 @@ export default {
       if (!validate()) return;
       try {
         const res = await fetch(
-          `http://localhost:8080/crewmember/?token=${INVITE_TOKEN}`,
+          `http://localhost:8080/crewmember?token=${INVITE_TOKEN}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form),
+            body: JSON.stringify({
+              firstName: form.firstName,
+              lastName: form.lastName,
+              email: form.email,
+              phoneNumber: form.phoneNumber,
+              role: form.role,
+              positions: [form.qualifiedPosition], // important: backend expects array!
+              password: form.password,
+            }),
           }
         );
 
