@@ -61,7 +61,7 @@ export default {
       if (!validate()) return;
       try {
         const res = await fetch(
-          `http://localhost:8080/crewmember/crewmember?token=${INVITE_TOKEN}`,
+          `http://localhost:8080/crewmember/?token=${INVITE_TOKEN}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

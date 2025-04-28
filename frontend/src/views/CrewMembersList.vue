@@ -24,7 +24,7 @@ export default {
 
     const loadMembers = async () => {
       try {
-        const res = await fetch("/crewmember/crewmembers");
+        const res = await fetch("/crewmember");
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
         }
