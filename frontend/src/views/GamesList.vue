@@ -36,7 +36,7 @@ onMounted(loadGames)
 
 async function loadGames() {
   try {
-    const res = await fetch('/gameSchedule/games')
+    const res = await fetch('http://localhost:8080/gameSchedule/games')
     if (!res.ok) throw new Error(await res.text())
     const payload = await res.json()
     games.value = Array.isArray(payload.data) ? payload.data : []

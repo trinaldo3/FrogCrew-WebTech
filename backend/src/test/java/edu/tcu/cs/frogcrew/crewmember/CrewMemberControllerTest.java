@@ -48,7 +48,7 @@ class CrewMemberControllerTest {
         saved.setPhoneNumber(dto.getPhoneNumber());
         saved.setPassword(dto.getPassword());
         saved.setRole(dto.getRole());
-        saved.setPosition(dto.getPosition());
+        // saved.setPosition(dto.getPosition());
 
         when(crewMemberService.create(any(CrewMemberDTO.class))).thenReturn(saved);
 
@@ -134,7 +134,7 @@ class CrewMemberControllerTest {
         crew1.setEmail("john.doe@tcu.edu");
         crew1.setPhoneNumber("1234567890");
         crew1.setRole("ADMIN");
-        crew1.setPosition(List.of("Producer"));
+        // crew1.setPosition(List.of("Producer"));
 
         CrewMember crew2 = new CrewMember();
         crew2.setId(2L);
@@ -143,7 +143,7 @@ class CrewMemberControllerTest {
         crew2.setEmail("jane.smith@tcu.edu");
         crew2.setPhoneNumber("0987654321");
         crew2.setRole("CREW");
-        crew2.setPosition(List.of("Director"));
+        // crew2.setPosition(List.of("Director"));
 
         when(crewMemberService.findAll()).thenReturn(List.of(crew1, crew2));
 
