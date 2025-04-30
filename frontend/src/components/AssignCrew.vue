@@ -1,75 +1,73 @@
 <template>
     <div class="assign-crew">
-      <h2>Assign Crew to Game</h2>
-      <div>
-        <label>Select Game:</label>
-        <select v-model="selectedGameId">
-          <option disabled value="">-- Select a Game --</option>
-          <option v-for="game in games" :key="game.id" :value="game.id">
-            {{ game.opponent }} @ {{ game.location }} - {{ game.gameDate }}
-          </option>
-        </select>
+      <h2>Assign Individual Crew Members to a Game</h2>
+  
+      <div v-if="crew.length === 0">
+        Loading crew members...
       </div>
   
-      <div v-if="crew.length">
-        <h3>Select Crew Members:</h3>
-        <div v-for="member in crew" :key="member.id">
-          <input type="checkbox" :value="member.id" v-model="selectedCrewIds" />
-          {{ member.name }} ({{ member.role }})
-        </div>
+      <div v-for="member in crew" :key="member.id" class="crew-card">
+        <p><strong>{{ member.name }}</strong> ({{ member.role }})</p>
+        <input
+          v-model="assignments[member.id]"
+          placeholder="Enter Game ID"
+          type="text"
+        />
+        <button @click="assign(member.id)">Assign</button>
+        <p class="success" v-if="successMap[member.id]">{{ successMap[member.id] }}</p>
+        <p class="error" v-if="errorMap[member.id]">{{ errorMap[member.id] }}</p>
       </div>
-  
-      <button @click="assignCrew">Assign Crew</button>
-      <p v-if="success">{{ success }}</p>
-      <p v-if="error" style="color: red">{{ error }}</p>
     </div>
   </template>
   
   <script setup>
   import { ref, onMounted } from 'vue'
   
-  const games = ref([])
   const crew = ref([])
-  const selectedGameId = ref('')
-  const selectedCrewIds = ref([])
-  const success = ref('')
-  const error = ref('')
+  const assignments = ref({})
+  const successMap = ref({})
+  const errorMap = ref({})
   
-  onMounted(() => {
-    fetch('http://localhost:8080/gameSchedule/games')
-      .then(res => res.json())
-      .then(data => games.value = data.data)
-  
-    fetch('http://localhost:8080/crewmember/all')
-      .then(res => res.json())
-      .then(data => crew.value = data.data)
+  onMounted(async () => {
+    try {
+      const res = await fetch('http://localhost:8080/crewmember/all')
+      const data = await res.json()
+      crew.value = data.data
+    } catch (e) {
+      alert('Failed to load crew members')
+    }
   })
   
-  function assignCrew() {
-    fetch(`http://localhost:8080/gameSchedule/assignCrew?gameId=${selectedGameId.value}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(selectedCrewIds.value)
-    })
-      .then(res => {
-        if (!res.ok) throw new Error('Assignment failed')
-        return res.json()
-      })
-      .then(() => {
-        success.value = 'Crew assigned successfully!'
-        error.value = ''
-      })
-      .catch(err => {
-        success.value = ''
-        error.value = err.message
-      })
+  async function assign(crewId) {
+    const gameId = assignments.value[crewId]
+    try {
+        const res = await fetch(`http://localhost:8080/gameSchedule/games/${gameId}/assign`, {
+
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify([crewId]),
+        }
+      )
+      if (!res.ok) throw new Error('Failed to assign')
+      successMap.value[crewId] = `Assigned to Game ${gameId}`
+      errorMap.value[crewId] = ''
+    } catch (err) {
+      errorMap.value[crewId] = 'Assignment failed'
+      successMap.value[crewId] = ''
+    }
   }
   </script>
   
   <style scoped>
-  .assign-crew {
-    max-width: 600px;
-    margin: auto;
+  .crew-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .success {
+    color: green;
+  }
+  .error {
+    color: red;
   }
   </style>
-  
