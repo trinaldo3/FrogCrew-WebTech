@@ -10,6 +10,7 @@
           <th>Qualified Position</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>Action</th> <!-- New column -->
         </tr>
       </thead>
       <tbody>
@@ -19,6 +20,9 @@
           <td>{{ m.qualifiedPosition }}</td>
           <td>{{ m.email }}</td>
           <td>{{ m.phoneNumber }}</td>
+          <td>
+            <button @click="removeMember(m.id)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -62,6 +66,10 @@ async function loadMembers() {
     error.value = 'Unable to load crew members.'
   }
 }
+
+function removeMember(id) {
+  members.value = members.value.filter(m => m.id !== id)
+}
 </script>
 
 <style scoped>
@@ -70,4 +78,16 @@ table     { width: 100%; border-collapse: collapse; }
 th, td    { padding: .6rem; border-bottom: 1px solid #ddd; }
 th        { text-align: left; background: #eee; }
 .error    { color: #d9534f; margin-top: 1rem; text-align: center; }
+
+button {
+  padding: 0.3rem 0.6rem;
+  background: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #c9302c;
+}
 </style>
