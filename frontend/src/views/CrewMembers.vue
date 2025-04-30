@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper">
+  <section v-if="isAuthorized" class="wrapper">
     <h2>Crew Members</h2>
 
     <table v-if="members.length">
@@ -26,22 +26,36 @@
     <p v-else>No crew members found.</p>
     <p v-if="error" class="error">{{ error }}</p>
   </section>
+
+  <div v-else>
+    <p class="error">Unauthorized access. Redirecting...</p>
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 const members = ref([])
-const error   = ref('')
+const error = ref('')
+const isAuthorized = ref(true)
+
+const router = useRouter()
+const user = JSON.parse(localStorage.getItem('user'))
+
+if (!user || user.role !== 'admin') {
+  isAuthorized.value = false
+  setTimeout(() => router.push('/'), 2000)
+}
 
 onMounted(loadMembers)
 
 async function loadMembers() {
   try {
+    if (!isAuthorized.value) return
     const res = await fetch('http://localhost:8080/crewmember/all')
     if (!res.ok) throw new Error(await res.text())
     const payload = await res.json()
-    // the back-end wrapper returns { flag, code, data }
     members.value = Array.isArray(payload.data) ? payload.data : []
   } catch (e) {
     console.error(e)
@@ -55,5 +69,5 @@ async function loadMembers() {
 table     { width: 100%; border-collapse: collapse; }
 th, td    { padding: .6rem; border-bottom: 1px solid #ddd; }
 th        { text-align: left; background: #eee; }
-.error    { color: #d9534f; margin-top: 1rem; }
+.error    { color: #d9534f; margin-top: 1rem; text-align: center; }
 </style>

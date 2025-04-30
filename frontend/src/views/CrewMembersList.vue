@@ -1,5 +1,5 @@
 <template>
-  <div class="crew-list">
+  <div class="crew-list" v-if="isAuthorized">
     <h1>All Crew Members</h1>
     <ul>
       <li v-for="member in members" :key="member.id">
@@ -11,6 +11,9 @@
     </ul>
     <p v-if="error" class="error">Unable to load crew members.</p>
   </div>
+  <div v-else>
+    <p class="error">Unauthorized access. Redirecting...</p>
+  </div>
 </template>
 
 <script>
@@ -18,9 +21,17 @@ import { ref, onMounted } from "vue";
 
 export default {
   name: "CrewMembersList",
-  setup() {
+  setup(_, { router }) {
     const members = ref([]);
     const error = ref(false);
+    const isAuthorized = ref(true);
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || user.role !== "admin") {
+      isAuthorized.value = false;
+      setTimeout(() => router.push("/"), 2000); // redirect after message
+      return { members, error, isAuthorized };
+    }
 
     const loadMembers = async () => {
       try {
@@ -29,7 +40,6 @@ export default {
           throw new Error(`HTTP ${res.status}`);
         }
         const payload = await res.json();
-        // our backend wraps the list in payload.data
         members.value = payload.data || [];
       } catch (e) {
         console.error("Failed to load crew members", e);
@@ -39,7 +49,7 @@ export default {
 
     onMounted(loadMembers);
 
-    return { members, error };
+    return { members, error, isAuthorized };
   },
 };
 </script>
