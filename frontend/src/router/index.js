@@ -8,6 +8,8 @@ import Games from '../views/Games.vue'
 import CrewMemberProfile from '../views/CrewMemberProfile.vue'
 import Login from '../views/Login.vue'
 import CrewListForGame from '../views/CrewListForGame.vue'
+import AssignCrew from '../components/AssignCrew.vue'
+
 
 const routes = [
   { path: '/', name: 'home', component: Home },
@@ -22,6 +24,17 @@ const routes = [
     path: '/games/:id/crew',
     name: 'crewList',
     component: () => import('../views/CrewListForGame.vue')
+  },
+  {
+    path: '/assign-crew',
+    name: 'AssignCrew',
+    component: AssignCrew,
+    meta: { requiresAuth: true, requiresAdmin: true } // optional
+  },
+  {
+    path: '/profile/:id',
+    name: 'CrewProfile',
+    component: () => import('../views/CrewProfile.vue')
   }
   
 ]

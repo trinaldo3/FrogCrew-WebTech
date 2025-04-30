@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface CrewMemberRepository extends JpaRepository<CrewMember, Long> {
     Optional<CrewMember> findByEmail(String email);
+    
 }

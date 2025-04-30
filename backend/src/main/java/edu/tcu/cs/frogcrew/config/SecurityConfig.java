@@ -13,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import static org.springframework.security.config.Customizer.withDefaults;
+
 
 import java.util.List;
 
@@ -20,21 +22,21 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-public SecurityFilterChain filterChain(HttpSecurity http, CustomUserDetailsService userDetailsService) throws Exception {
-    http
-        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-        .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/login", "/crewmember").permitAll()
-            .anyRequest().authenticated()
-        )
-        .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-        .authenticationProvider(authenticationProvider(userDetailsService))
-        .formLogin(form -> form.disable()) // ✅ disable Spring's login page
-        .httpBasic(httpBasic -> httpBasic.disable()); // optional
-
-    return http.build();
-}
+    public SecurityFilterChain filterChain(HttpSecurity http, CustomUserDetailsService userDetailsService) throws Exception {
+        http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
+            .headers(headers -> headers.frameOptions().disable()) // allow H2 console
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/h2-console/**", "/api/login", "/crewmember/all").permitAll()
+                .anyRequest().permitAll()
+            )
+            .authenticationProvider(authenticationProvider(userDetailsService))
+            .formLogin(form -> form.disable())
+            .httpBasic(withDefaults()); // <-- this part is key
+    
+        return http.build();
+    }
 
     
 
