@@ -19,7 +19,7 @@ const routes = [
   { path: '/games', name: 'games', component: Games, meta: { requiresAuth: true, roles: ['admin', 'crew'] } },
   { path: '/crew-member/:id', name: 'profile', component: CrewMemberProfile, meta: { requiresAuth: true, roles: ['admin', 'crew'] } },
   { path: '/login', name: 'login', component: Login },
-  { path: '/:catchAll(.*)*', name: 'notFound', component: { template: '<h1>Page not found</h1>' } },
+  { path: '/:catchAll(.*)*', redirect: '/' },
   {
     path: '/games/:id/crew',
     name: 'crewList',

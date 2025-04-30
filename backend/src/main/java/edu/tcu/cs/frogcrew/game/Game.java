@@ -24,6 +24,8 @@ public class Game {
 
     private String opponent;
 
+    private String sport;
+
     private boolean isFinalized;
 
     @ManyToMany
@@ -91,5 +93,14 @@ public class Game {
     public void setAssignedCrew(List<CrewMember> assignedCrew) {
         this.assignedCrew = assignedCrew;
     }
+
+    public String getSport() {
+        return sport;
+    }
+    
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+    
     
 }

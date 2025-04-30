@@ -40,12 +40,14 @@ public class GameController {
         List<Map<String, Object>> data = addedGames.stream().map(game -> {
             Map<String, Object> g = new HashMap<>();
             g.put("id", game.getGameId());
+            g.put("sport", game.getSport());
             g.put("opponent", game.getOpponent());
             g.put("location", game.getLocation());
             g.put("gameDate", game.getGameDate());
             g.put("callTime", game.getCallTime());
             return g;
         }).toList();
+        
 
         Map<String, Object> response = new HashMap<>();
         response.put("flag", true);

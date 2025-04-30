@@ -32,9 +32,10 @@ public class GameService {
             g.setLocation(dto.getLocation());
             g.setGameDate(dto.getGameDate());
             g.setCallTime(dto.getCallTime());
+            g.setSport(dto.getSport()); 
             return g;
         }).toList();
-
+    
         return repository.saveAll(games);
     }
 
