@@ -43,7 +43,7 @@ function parseUser() {
 
 const user = ref(parseUser());
 const role = ref(user.value?.role);
-const isLoggedIn = ref(!!user.value);
+const isLoggedIn = ref(user.value !== null && user.value?.role);
 
 watch(route, () => {
   const newUser = parseUser();
