@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="login">
     <h2>Login</h2>
     <form @submit.prevent="handleLogin">
@@ -75,8 +75,8 @@ button {
   color: #d9534f;
   margin-top: 1rem;
 }
-</style>
-<!-- <template>
+</style> -->
+<template>
     <div class="login">
       <h2>Login</h2>
       <form @submit.prevent="login">
@@ -121,5 +121,5 @@ button {
     padding: 0.5rem;
     font-size: 1rem;
   }
-  </style> -->
+  </style>
   
