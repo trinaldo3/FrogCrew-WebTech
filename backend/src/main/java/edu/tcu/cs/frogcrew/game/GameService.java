@@ -2,6 +2,9 @@ package edu.tcu.cs.frogcrew.game;
 
 import org.springframework.stereotype.Service;
 
+import edu.tcu.cs.frogcrew.crewmember.CrewMember;
+import edu.tcu.cs.frogcrew.crewmember.CrewMemberRepository;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,9 +13,10 @@ public class GameService {
 
     private final GameRepository repository;
 
-    public GameService(GameRepository repository) {
-        this.repository = repository;
-    }
+    // public GameService(GameRepository repository) {
+    //     this.repository = repository;
+    //     this.crewRepository = null;
+    // }
 
     public List<GameDTO> getAllGameDTOs() {
         return repository.findAll()
@@ -33,4 +37,23 @@ public class GameService {
 
         return repository.saveAll(games);
     }
+
+
+    public void assignCrewMembers(Long gameId, List<Long> crewIds) {
+    Game game = repository.findById(gameId)
+            .orElseThrow(() -> new RuntimeException("Game not found"));
+
+    List<CrewMember> crewList = crewRepository.findAllById(crewIds);
+    game.setAssignedCrew(crewList); // This assumes a `List<CrewMember>` field on Game
+
+    repository.save(game);
+}
+private final CrewMemberRepository crewRepository;
+
+public GameService(GameRepository repository, CrewMemberRepository crewRepository) {
+    this.repository = repository;
+    this.crewRepository = crewRepository;
+}
+
+
 }

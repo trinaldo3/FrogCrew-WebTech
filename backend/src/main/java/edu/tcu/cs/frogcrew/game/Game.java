@@ -3,6 +3,9 @@ package edu.tcu.cs.frogcrew.game;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+
+import edu.tcu.cs.frogcrew.crewmember.CrewMember;
 
 @Entity
 public class Game {
@@ -23,7 +26,11 @@ public class Game {
 
     private boolean isFinalized;
 
-    public Game() {}
+    @ManyToMany
+    private List<CrewMember> assignedCrew;
+
+    public Game() {
+    }
 
     public Long getGameId() {
         return gameId;
@@ -80,4 +87,9 @@ public class Game {
     public void setFinalized(boolean finalized) {
         isFinalized = finalized;
     }
+
+    public void setAssignedCrew(List<CrewMember> assignedCrew) {
+        this.assignedCrew = assignedCrew;
+    }
+    
 }

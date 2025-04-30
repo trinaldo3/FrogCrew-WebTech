@@ -7,9 +7,8 @@
       <router-link v-if="role === 'crew'" to="/profile/edit"
         >Edit Profile</router-link
       >
-      <router-link v-if="role === 'admin'" to="/crewmembers"
-        >Crew Members</router-link
-      >
+      <router-link v-if="isLoggedIn" to="/crewmembers">Crew Members</router-link>
+
       <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
       <router-link v-if="isLoggedIn" @click.prevent="logout" to="/"
         >Logout</router-link
@@ -74,8 +73,10 @@ watch(route, () => {
 
 function logout() {
   localStorage.removeItem("user");
+  router.push("/"); // 👈 go to public home
   location.reload(); // resets nav state
 }
+
 
 </script>
 

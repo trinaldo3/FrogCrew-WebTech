@@ -56,4 +56,18 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/games/{gameId}/assign")
+    public ResponseEntity<Map<String, Object>> assignCrewToGame(
+            @PathVariable Long gameId,
+            @RequestBody List<Long> crewIds) {
+
+        service.assignCrewMembers(gameId, crewIds);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("flag", true);
+        response.put("code", 200);
+        response.put("message", "Crew assigned successfully.");
+        return ResponseEntity.ok(response);
+    }
+
 }

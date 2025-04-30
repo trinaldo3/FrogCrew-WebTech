@@ -25,7 +25,7 @@ public SecurityFilterChain filterChain(HttpSecurity http, CustomUserDetailsServi
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/login", "/crewmember").permitAll()
+            .requestMatchers("/api/login", "/crewmember/all").permitAll()
             .anyRequest().authenticated()
         )
         .headers(headers -> headers.frameOptions(frame -> frame.disable()))
