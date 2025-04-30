@@ -3,6 +3,8 @@ package edu.tcu.cs.frogcrew.crewmember;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,6 +14,9 @@ class CrewMemberServiceTest {
 
     @Mock
     CrewMemberRepository crewMemberRepository;
+
+    @Mock
+    PasswordEncoder passwordEncoder; // <-- Added
 
     @InjectMocks
     CrewMemberService crewMemberService;
@@ -39,10 +44,11 @@ class CrewMemberServiceTest {
         saved.setLastName(dto.getLastName());
         saved.setEmail(dto.getEmail());
         saved.setPhoneNumber(dto.getPhoneNumber());
-        saved.setPassword(dto.getPassword());
+        saved.setPassword("encoded-secret");
         saved.setRole(dto.getRole());
         saved.setQualifiedPosition(dto.getPosition());
 
+        when(passwordEncoder.encode("secret")).thenReturn("encoded-secret"); // <-- Added
         when(crewMemberRepository.save(any(CrewMember.class))).thenReturn(saved);
 
         // Act
