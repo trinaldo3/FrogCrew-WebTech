@@ -8,6 +8,7 @@ public class GameDTO {
     private Long gameId;
     private String opponent;
     private String location;
+    private String sport;
     private LocalDate gameDate;
     private LocalTime callTime;
     private boolean isFinalized;
@@ -21,6 +22,7 @@ public class GameDTO {
         this.location = game.getLocation();
         this.gameDate = game.getGameDate();
         this.callTime = game.getCallTime();
+        this.sport = game.getSport();
         this.isFinalized = game.isFinalized();
     }
 
@@ -71,4 +73,13 @@ public class GameDTO {
     public void setFinalized(boolean finalized) {
         isFinalized = finalized;
     }
+
+    public String getSport() {
+        return sport;
+    }
+    
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+    
 }
