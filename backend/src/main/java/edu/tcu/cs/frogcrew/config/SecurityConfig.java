@@ -28,7 +28,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .headers(headers -> headers.frameOptions().disable()) // allow H2 console
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**", "/api/login", "/crewmember").permitAll()
+                .requestMatchers("/h2-console/**", "/api/login", "/crewmember/all").permitAll()
                 .anyRequest().permitAll()
             )
             .authenticationProvider(authenticationProvider(userDetailsService))
@@ -37,7 +37,6 @@ public class SecurityConfig {
     
         return http.build();
     }
-    
 
     
 
