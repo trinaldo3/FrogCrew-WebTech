@@ -6,6 +6,8 @@ import EditProfile from '../components/EditProfile.vue'
 import CrewMembers from '../views/CrewMembers.vue'
 import Games from '../views/Games.vue'
 import CrewMemberProfile from '../views/CrewMemberProfile.vue'
+import Login from '../views/Login.vue'
+import CrewListForGame from '../views/CrewListForGame.vue'
 
 const routes = [
   { path: '/', name: 'home', component: Home },
@@ -14,7 +16,14 @@ const routes = [
   { path: '/crewmembers', name: 'crewMembers', component: CrewMembers, meta: { requiresAuth: true, roles: ['admin'] } },
   { path: '/games', name: 'games', component: Games, meta: { requiresAuth: true, roles: ['admin', 'crew'] } },
   { path: '/crew-member/:id', name: 'profile', component: CrewMemberProfile, meta: { requiresAuth: true, roles: ['admin', 'crew'] } },
-  { path: '/:catchAll(.*)*', name: 'notFound', component: { template: '<h1>Page not found</h1>' } }
+  { path: '/login', name: 'login', component: Login },
+  { path: '/:catchAll(.*)*', name: 'notFound', component: { template: '<h1>Page not found</h1>' } },
+  {
+    path: '/games/:id/crew',
+    name: 'crewList',
+    component: () => import('../views/CrewListForGame.vue')
+  }
+  
 ]
 
 const router = createRouter({

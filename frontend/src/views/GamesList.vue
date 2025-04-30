@@ -9,7 +9,7 @@
           <th>Sport</th>
           <th>Opponent</th>
           <th>Venue</th>
-          <th v-if="isAdmin">Actions</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -18,7 +18,15 @@
           <td>{{ g.sport }}</td>
           <td>{{ g.opponent }}</td>
           <td>{{ g.venue }}</td>
-          <td v-if="isAdmin"><button @click="editGame(g.id)">Edit</button></td>
+          <td>
+            <button v-if="isAdmin" @click="editGame(g.id)">Edit</button>
+            <router-link
+              v-if="user"
+              :to="`/games/${g.id}/crew`"
+              class="view-crew"
+              >View Crew</router-link
+            >
+          </td>
         </tr>
       </tbody>
     </table>
@@ -33,51 +41,77 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
-const games = ref([])
-const error = ref('')
+const router = useRouter();
+const games = ref([]);
+const error = ref("");
 
-const user = JSON.parse(localStorage.getItem('user'))
-const isAdmin = user?.role === 'admin'
+const user = JSON.parse(localStorage.getItem("user"));
+const isAdmin = user?.role === "admin";
 
 if (!user) {
-  setTimeout(() => router.push('/'), 2000)
+  setTimeout(() => router.push("/"), 2000);
 }
 
-onMounted(loadGames)
+onMounted(loadGames);
 
 async function loadGames() {
   try {
-    const res = await fetch('http://localhost:8080/gameSchedule/games')
-    if (!res.ok) throw new Error(await res.text())
-    const payload = await res.json()
-    games.value = Array.isArray(payload.data) ? payload.data : []
+    const res = await fetch("http://localhost:8080/gameSchedule/games");
+    if (!res.ok) throw new Error(await res.text());
+    const payload = await res.json();
+    games.value = Array.isArray(payload.data) ? payload.data : [];
   } catch (e) {
-    console.error(e)
-    error.value = 'Unable to load games.'
+    console.error(e);
+    error.value = "Unable to load games.";
   }
 }
 
 function formatDate(str) {
   return new Date(str).toLocaleDateString(undefined, {
-    year: 'numeric', month: 'short', day: 'numeric'
-  })
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 
 function editGame(id) {
-  alert(`Redirect to admin edit game view for Game ID ${id}`)
+  alert(`Redirect to admin edit game view for Game ID ${id}`);
   // Replace with: router.push({ name: 'editGame', params: { id } }) if implemented
 }
 </script>
 
 <style scoped>
-.wrapper { max-width: 800px; margin: 2rem auto; }
-table     { width: 100%; border-collapse: collapse; }
-th, td    { padding: .6rem; border-bottom: 1px solid #ddd; }
-th        { text-align: left; background: #eee; }
-button    { padding: 0.3rem 0.6rem; border: none; background: #4D1979; color: white; border-radius: 4px; cursor: pointer; }
-.error    { color: #d9534f; margin-top: 1rem; text-align: center; }
+.wrapper {
+  max-width: 800px;
+  margin: 2rem auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  text-align: left;
+  background: #eee;
+}
+button {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  background: #4d1979;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.error {
+  color: #d9534f;
+  margin-top: 1rem;
+  text-align: center;
+}
 </style>
