@@ -27,18 +27,22 @@ const router = useRouter()
 
 async function handleLogin() {
   try {
+    const formData = new URLSearchParams()
+    formData.append('username', email.value) // must be "username"
+    formData.append('password', password.value) // must be "password"
+
     const res = await fetch('http://localhost:8080/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email.value, password: password.value }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData,
+      credentials: 'include', // <-- include cookies/session
     })
 
     if (!res.ok) throw new Error('Invalid credentials')
-
-    const user = await res.json()
-    localStorage.setItem('user', JSON.stringify(user))
-
-    router.push('/') // redirect to home or dashboard
+    alert('Login successful!')
+    router.push('/')
   } catch (err) {
     error.value = err.message || 'Login failed'
   }
