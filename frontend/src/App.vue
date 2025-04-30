@@ -4,14 +4,22 @@
       <router-link to="/">Home</router-link>
       <router-link to="/register">Register</router-link>
 
+<<<<<<< HEAD
       
+=======
+      <router-link v-if="role === 'crew'" to="/profile/edit"
+        >Edit Profile</router-link
+      >
+      <router-link v-if="role === 'crew'" :to="`/profile/${user?.id}`">My Profile</router-link>
+
+>>>>>>> main
       <router-link v-if="isLoggedIn" to="/crewmembers">Crew Members</router-link>
 
       <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
       <router-link v-if="isLoggedIn" @click.prevent="logout" to="/"
         >Logout</router-link
       >
-
+      <router-link v-if="role === 'admin'" to="/assign-crew">Assign Crew</router-link>
       <router-link v-if="isLoggedIn" to="/games">Games</router-link>
     </nav>
     <router-view />
