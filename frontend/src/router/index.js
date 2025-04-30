@@ -34,7 +34,16 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   console.log(`${from.name || '-'} → ${to.name}`)
 
-  const user = JSON.parse(localStorage.getItem('user'))
+  let user = null
+  try {
+    const stored = localStorage.getItem('user')
+    if (stored && stored !== 'undefined') {
+      user = JSON.parse(stored)
+    }
+  } catch (e) {
+    console.warn('Invalid user JSON in localStorage. Clearing it.')
+    localStorage.removeItem('user')
+  }
 
   if (to.meta.requiresAuth) {
     if (!user) {
@@ -43,7 +52,6 @@ router.beforeEach((to, from, next) => {
     }
 
     if (to.meta.roles && !to.meta.roles.includes(user.role)) {
-      // Role not authorized
       alert('You do not have permission to access this page.')
       return next({ name: 'home' })
     }
@@ -51,6 +59,7 @@ router.beforeEach((to, from, next) => {
 
   next()
 })
+
 
 router.afterEach((to) => {
   console.log(`Successfully navigated to: ${to.fullPath}`)

@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div class="login">
     <h2>Login</h2>
     <form @submit.prevent="handleLogin">
@@ -9,6 +9,14 @@
       <div class="form-group">
         <label>Password:</label>
         <input v-model="password" type="password" required />
+      </div>
+      <div class="form-group">
+        <label>Role:</label>
+        <select v-model="role" required>
+          <option disabled value="">Select Role</option>
+          <option value="crew">Crew Member</option>
+          <option value="admin">Admin</option>
+        </select>
       </div>
       <button type="submit">Log In</button>
     </form>
@@ -22,6 +30,7 @@ import { useRouter } from 'vue-router'
 
 const email = ref('')
 const password = ref('')
+const role = ref('')
 const error = ref('')
 const router = useRouter()
 
@@ -37,16 +46,21 @@ async function handleLogin() {
     })
 
     const data = await res.json()
+    console.log('Login response:', data)
 
     if (!data.flag) throw new Error(data.message || 'Login failed')
+
+    // Add selected role manually
+    const userWithRole = { ...data.user, role: role.value }
+    localStorage.setItem('user', JSON.stringify(userWithRole))
 
     alert('Login successful!')
     router.push('/')
   } catch (err) {
+    console.error(err)
     error.value = err.message
   }
 }
-
 </script>
 
 <style scoped>
@@ -58,7 +72,7 @@ async function handleLogin() {
 .form-group {
   margin-bottom: 1rem;
 }
-input {
+input, select {
   padding: 0.5rem;
   width: 100%;
   box-sizing: border-box;
@@ -75,51 +89,4 @@ button {
   color: #d9534f;
   margin-top: 1rem;
 }
-</style> -->
-<template>
-    <div class="login">
-      <h2>Login</h2>
-      <form @submit.prevent="login">
-        <label>
-          Select Role:
-          <select v-model="role">
-            <option disabled value="">-- Choose Role --</option>
-            <option value="crew">Crew Member</option>
-            <option value="admin">Admin</option>
-          </select>
-        </label>
-        <br /><br />
-        <button type="submit">Log In</button>
-      </form>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
-  
-  const role = ref('')
-  const router = useRouter()
-  
-  function login() {
-    if (!role.value) return alert('Please select a role')
-    localStorage.setItem(
-      'user',
-      JSON.stringify({ id: 1, role: role.value })
-    )
-    router.push('/') // triggers nav update
-  }
-  </script>
-  
-  <style scoped>
-  .login {
-    max-width: 400px;
-    margin: 2rem auto;
-    text-align: center;
-  }
-  select, button {
-    padding: 0.5rem;
-    font-size: 1rem;
-  }
-  </style>
-  
+</style>
