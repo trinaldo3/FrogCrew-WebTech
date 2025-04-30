@@ -22,28 +22,11 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router"; 
 
+const route = useRoute();
+const router = useRouter(); 
 
-// const route = useRoute();
-
-// const user = ref(JSON.parse(localStorage.getItem("user")));
-// const role = ref(user.value?.role);
-// const isLoggedIn = ref(!!user.value);
-
-// // Watch route changes to re-check localStorage state
-// watch(route, () => {
-//   const newUser = JSON.parse(localStorage.getItem("user"));
-//   user.value = newUser;
-//   role.value = newUser?.role;
-//   isLoggedIn.value = !!newUser;
-// });
-// function logout() {
-//   localStorage.removeItem('user')
-//   location.reload() // resets nav state
-// }
-
-// Check for null
 function parseUser() {
   try {
     const stored = localStorage.getItem("user");
@@ -56,14 +39,10 @@ function parseUser() {
   }
 }
 
-
-const route = useRoute();
-
 const user = ref(parseUser());
 const role = ref(user.value?.role);
 const isLoggedIn = ref(!!user.value);
 
-// Watch route changes to re-check localStorage state
 watch(route, () => {
   const newUser = parseUser();
   user.value = newUser;
@@ -73,12 +52,11 @@ watch(route, () => {
 
 function logout() {
   localStorage.removeItem("user");
-  router.push("/"); // 👈 go to public home
-  location.reload(); // resets nav state
+  router.push("/");        
+  location.reload();       
 }
-
-
 </script>
+
 
 <style>
 nav {
