@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
 import CrewMemberRegistration from '../components/CrewMemberRegistration.vue'
-import EditProfile from '../components/EditProfile.vue'
 import CrewMembers from '../views/CrewMembers.vue'
 import Games from '../views/Games.vue'
 import CrewMemberProfile from '../views/CrewMemberProfile.vue'
@@ -12,8 +11,7 @@ import CrewListForGame from '../views/CrewListForGame.vue'
 const routes = [
   { path: '/', name: 'home', component: Home },
   { path: '/register', name: 'register', component: CrewMemberRegistration },
-  { path: '/profile/edit', name: 'editProfile', component: EditProfile, meta: { requiresAuth: true, roles: ['crew'] } },
-  { path: '/crewmembers', name: 'crewMembers', component: CrewMembers, meta: { requiresAuth: true, roles: ['admin'] } },
+  { path: '/crewmembers', name: 'crewMembers', component: CrewMembers, meta: { requiresAuth: true, roles: ['admin', 'crew'] } },
   { path: '/games', name: 'games', component: Games, meta: { requiresAuth: true, roles: ['admin', 'crew'] } },
   { path: '/crew-member/:id', name: 'profile', component: CrewMemberProfile, meta: { requiresAuth: true, roles: ['admin', 'crew'] } },
   { path: '/login', name: 'login', component: Login },

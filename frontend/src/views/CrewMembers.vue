@@ -10,7 +10,7 @@
           <th>Qualified Position</th>
           <th>Email</th>
           <th>Phone</th>
-          <th>Action</th> <!-- New column -->
+          <th v-if="isAdmin">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
           <td>{{ m.qualifiedPosition }}</td>
           <td>{{ m.email }}</td>
           <td>{{ m.phoneNumber }}</td>
-          <td>
+          <td v-if="isAdmin">
             <button @click="removeMember(m.id)">Delete</button>
           </td>
         </tr>
@@ -47,7 +47,10 @@ const isAuthorized = ref(true)
 const router = useRouter()
 const user = JSON.parse(localStorage.getItem('user'))
 
-if (!user || user.role !== 'admin') {
+const isAdmin = user?.role === 'admin'
+
+// ✅ Allow crew and admin
+if (!user || !['admin', 'crew'].includes(user.role)) {
   isAuthorized.value = false
   setTimeout(() => router.push('/'), 2000)
 }

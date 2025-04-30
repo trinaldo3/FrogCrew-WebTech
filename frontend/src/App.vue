@@ -4,9 +4,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/register">Register</router-link>
 
-      <router-link v-if="role === 'crew'" to="/profile/edit"
-        >Edit Profile</router-link
-      >
+      
       <router-link v-if="isLoggedIn" to="/crewmembers">Crew Members</router-link>
 
       <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
