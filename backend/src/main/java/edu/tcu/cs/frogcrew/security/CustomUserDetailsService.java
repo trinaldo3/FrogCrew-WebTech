@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,10 +22,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         CrewMember member = repository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
 
+        String role = member.getRole() != null ? member.getRole() : "CREW";
+
         return User.builder()
                 .username(member.getEmail())
-                .password(member.getPassword()) 
-                .roles(member.getRole()) // roles like "ADMIN", "CREW"
+                .password(member.getPassword())
+                .roles(role)
                 .build();
     }
 }
