@@ -27,26 +27,26 @@ const router = useRouter()
 
 async function handleLogin() {
   try {
-    const formData = new URLSearchParams()
-    formData.append('username', email.value) // must be "username"
-    formData.append('password', password.value) // must be "password"
-
-    const res = await fetch('http://localhost:8080/login', {
+    const res = await fetch('http://localhost:8080/api/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: formData,
-      credentials: 'include', // <-- include cookies/session
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value
+      }),
     })
 
-    if (!res.ok) throw new Error('Invalid credentials')
+    const data = await res.json()
+
+    if (!data.flag) throw new Error(data.message || 'Login failed')
+
     alert('Login successful!')
     router.push('/')
   } catch (err) {
-    error.value = err.message || 'Login failed'
+    error.value = err.message
   }
 }
+
 </script>
 
 <style scoped>
